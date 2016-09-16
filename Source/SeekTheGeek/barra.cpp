@@ -54,7 +54,7 @@ void Abarra::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		//Parâmetros: categoria, tipo, conteúdo (%d -> indica que ali haverá um int, que deve ser indicado no próximo parâmetro)
 		//UE_LOG(LogTemp, Warning, TEXT("Colect = %d"), Robson->GetColect());
 
-		UE_LOG(LogTemp, Warning, TEXT("TESTE"));
+		UE_LOG(LogTemp, Warning, TEXT("ROCAMBOLE"));
 
 
 		//Quando ocorrer a colisão e acrescentar a vida, destrói o objeto
