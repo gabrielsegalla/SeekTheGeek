@@ -2,6 +2,7 @@
 
 #include "SeekTheGeek.h"
 #include "barra.h"
+#include "BaseCharacter.h"
 
 
 // Sets default values
@@ -45,22 +46,22 @@ void Abarra::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 	
 	
 	//Se o ator for diferente de um ponteiro nulo / se o ator não for ele mesmo / se o comp for difertente de nulo
-	//if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ARobson::StaticClass())) {
-		//Converter objeto de um tipo generalizado para um mais específico (cast)
-		//ARobson* Robson = Cast<ARobson>(OtherActor);
-
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ABaseCharacter::StaticClass())) {
 		
+		//Converter objeto de um tipo generalizado para um mais específico (cast)
+		ABaseCharacter* Character = Cast<ABaseCharacter>(OtherActor);
+
+
 		//LOG
 		//Parâmetros: categoria, tipo, conteúdo (%d -> indica que ali haverá um int, que deve ser indicado no próximo parâmetro)
 		//UE_LOG(LogTemp, Warning, TEXT("Colect = %d"), Robson->GetColect());
 
-		UE_LOG(LogTemp, Warning, TEXT("ROCAMBOLE"));
-
+		UE_LOG(LogTemp, Warning, TEXT("ROCAMBINHO"));
 
 		//Quando ocorrer a colisão e acrescentar a vida, destrói o objeto
 		//Destroy();
 
-
+	}
 
 
 	

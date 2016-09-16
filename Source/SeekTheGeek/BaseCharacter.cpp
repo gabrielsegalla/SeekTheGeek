@@ -79,3 +79,13 @@ void ABaseCharacter::StartRun() {
 void ABaseCharacter::StopRun() {
 	GetCharacterMovement()->MaxWalkSpeed = 400;
 }
+
+//Encapsulamento da variável AreaBase
+void ABaseCharacter::SetAreaBase(bool NewAreaBase) {
+	AreaBase = NewAreaBase;
+}
+
+int ABaseCharacter::GetAreaBase() {
+	return AreaBase;
+
+}

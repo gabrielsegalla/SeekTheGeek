@@ -23,6 +23,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	//get e set do Life
+	void SetAreaBase(bool NewAreaBase);
+	int GetAreaBase();
+
 	
 private:
 	UPROPERTY(EditAnywhere)
@@ -37,6 +41,10 @@ private:
 	void MoveRight(float Value);
 	void StartRun();
 	void StopRun();
+
+	//bool pra identificar se o personagem está na área da base
+
+	bool AreaBase = false;
 
 
 
