@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SeekTheGeek.h"
-#include "barra.h"
+#include "Caixao.h"
 #include "BaseCharacter.h"
 
 
 // Sets default values
-Abarra::Abarra()
+ACaixao::ACaixao()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -15,7 +15,7 @@ Abarra::Abarra()
 
 	Root->bGenerateOverlapEvents = true;
 	Root->SetCollisionProfileName("OverlapAllDynamic");
-	Root->OnComponentBeginOverlap.AddDynamic(this, &Abarra::OnOverlapBegin);
+	Root->OnComponentBeginOverlap.AddDynamic(this, &ACaixao::OnOverlapBegin);
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
@@ -25,24 +25,24 @@ Abarra::Abarra()
 }
 
 // Called when the game starts or when spawned
-void Abarra::BeginPlay()
+void ACaixao::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void Abarra::Tick( float DeltaTime )
+void ACaixao::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
 }
 
-void Abarra::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	
+void ACaixao::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+
 	//Se o ator for diferente de um ponteiro nulo / se o ator não for ele mesmo / se o comp for difertente de nulo
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ABaseCharacter::StaticClass())) {
-		
+
 		//Converter objeto de um tipo generalizado para um mais específico (cast)
 		ABaseCharacter* Character = Cast<ABaseCharacter>(OtherActor);
 
@@ -51,13 +51,8 @@ void Abarra::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		//Parâmetros: categoria, tipo, conteúdo (%d -> indica que ali haverá um int, que deve ser indicado no próximo parâmetro)
 		//UE_LOG(LogTemp, Warning, TEXT("Colect = %d"), Robson->GetColect());
 
-		UE_LOG(LogTemp, Warning, TEXT("CÊ GANHO MULEKE"));
-
+		UE_LOG(LogTemp, Warning, TEXT("GUARDANDO CAXIÃO"));
 
 	}
-
-
-	
 }
-
 
