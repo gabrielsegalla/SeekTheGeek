@@ -20,11 +20,11 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	void SetPosX(int NewPosX);
-	int GetPosX();
+	void SetPosX(float NewPosX);
+	float GetPosX();
 
-	void SetPosY(int NewPosY);
-	int GetPosY();
+	void SetPosY(float NewPosY);
+	float GetPosY();
 
 private:
 
