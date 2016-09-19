@@ -51,7 +51,8 @@ void ABaseCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	InputComponent->BindAxis("MoveForward", this, &ABaseCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ABaseCharacter::MoveRight);
 
-	//InputComponent->BindAxis("Turn", this, &ABaseCharacter::Turn);
+	InputComponent->BindAxis("Turn", this, &ABaseCharacter::Turn);
+	InputComponent->BindAxis("LookUp", this, &ABaseCharacter::LookUp);
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
@@ -79,6 +80,17 @@ void ABaseCharacter::StartRun() {
 void ABaseCharacter::StopRun() {
 	GetCharacterMovement()->MaxWalkSpeed = 400;
 }
+
+
+//movimento do mouse
+void ABaseCharacter::Turn(float Value) {
+	AddControllerYawInput(Value);
+}
+
+void ABaseCharacter::LookUp(float Value) {
+	AddControllerPitchInput(Value);
+}
+
 
 //Encapsulamento da variável AreaBase
 void ABaseCharacter::SetAreaBase(bool NewAreaBase) {

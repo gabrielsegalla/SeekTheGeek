@@ -42,6 +42,10 @@ private:
 	void StartRun();
 	void StopRun();
 
+	void Turn(float Value);
+	void LookUp(float Value);
+
+
 	//bool pra identificar se o personagem está na área da base
 
 	bool AreaBase = false;
