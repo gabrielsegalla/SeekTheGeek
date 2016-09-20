@@ -13,7 +13,7 @@ class SEEKTHEGEEK_API ASeekTheGeekGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	
-	
+		ASeekTheGeekGameMode();
 	
 	
 };
