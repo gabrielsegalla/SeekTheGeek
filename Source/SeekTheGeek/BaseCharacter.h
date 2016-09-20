@@ -43,7 +43,7 @@ private:
 		USpringArmComponent* CameraBoom;
 	//stamina para o run
 	UPROPERTY(EditAnywhere)
-		int Stamina = 100;
+		int Stamina = 0;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseLookUpRate;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
