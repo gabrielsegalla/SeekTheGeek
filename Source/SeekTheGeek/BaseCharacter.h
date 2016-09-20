@@ -44,6 +44,10 @@ private:
 	//stamina para o run
 	UPROPERTY(EditAnywhere)
 		int Stamina = 0;
+	UPROPERTY(VisibleAnywhere, Category = Camera)
+		float BaseLookUpRate;
+	UPROPERTY(VisibleAnywhere, Category = Camera)
+		float BaseTurnRate;
 
 
 	void MoveForward(float Value);
@@ -53,7 +57,8 @@ private:
 
 	void Turn(float Value);
 	void LookUp(float Value);
-
+	void LookUpAtRate(float Rate);
+	void TurnAtRate(float Rate);
 
 	//bool pra identificar se o personagem está na área da base
 

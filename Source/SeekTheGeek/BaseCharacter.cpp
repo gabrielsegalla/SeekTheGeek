@@ -9,7 +9,9 @@ ABaseCharacter::ABaseCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+
+	BaseTurnRate = 45.f;
+	BaseLookUpRate = 45.f;
 	
 	
 	
@@ -52,7 +54,9 @@ void ABaseCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	InputComponent->BindAxis("MoveRight", this, &ABaseCharacter::MoveRight);
 
 	InputComponent->BindAxis("Turn", this, &ABaseCharacter::Turn);
+	InputComponent->BindAxis("TurnRate", this, &ABaseCharacter::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &ABaseCharacter::LookUp);
+	InputComponent->BindAxis("LookUpRate", this, &ABaseCharacter::LookUpAtRate);
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
@@ -64,14 +68,32 @@ void ABaseCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 }
 
 void ABaseCharacter::MoveForward(float Value) {
-	FVector Forward(1, 0, 0);
-	AddMovementInput(Forward, Value);
+	if (Value != 0.0f)
+	{
+		FVector Forward(1, 0, 0);
+		AddMovementInput(GetActorForwardVector(), Value);
+	}
+	
+	
 }
 
 
 void ABaseCharacter::MoveRight(float Value) {
-	FVector Right(0, 1, 0);
-	AddMovementInput(Right, Value);
+	if (Value != 0.0f)
+	{
+		FVector Right(0, 1, 0);
+		AddMovementInput(GetActorRightVector(), Value);
+	}
+}
+
+void ABaseCharacter::TurnAtRate(float Rate)
+{
+	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+}
+
+void ABaseCharacter::LookUpAtRate(float Rate)
+{
+	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
 void ABaseCharacter::StartRun() {
