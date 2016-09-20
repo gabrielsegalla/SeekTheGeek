@@ -43,6 +43,27 @@ void ABaseCharacter::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	if (Run) {
+		Stamina--;
+
+		UE_LOG(LogTemp, Warning, TEXT("Stamina--: %d"), Stamina);
+	}
+	else if(!Run) {
+		UE_LOG(LogTemp, Warning, TEXT("Stamina++: %d"), Stamina);
+		
+		Stamina++;
+	}
+
+	if (Stamina > 100) {
+		Stamina = 100;
+	}
+
+	if (Stamina < 0) {
+		StopRun();
+		Stamina = 0;
+	}
+
+
 }
 
 // Called to bind functionality to input
@@ -103,11 +124,17 @@ void ABaseCharacter::LookUpAtRate(float Rate)
 }
 
 void ABaseCharacter::StartRun() {
-	if (Stamina<0) {
-		GetCharacterMovement()->MaxWalkSpeed = 800;
+	if (Stamina > 0) {
+		Run = true;
 	}
+
+	if (Run) {
+		GetCharacterMovement()->MaxWalkSpeed =800;
+	}
+	
 }
 void ABaseCharacter::StopRun() {
+	Run = false;
 	GetCharacterMovement()->MaxWalkSpeed = 400;
 }
 
