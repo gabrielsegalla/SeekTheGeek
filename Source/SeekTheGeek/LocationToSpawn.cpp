@@ -19,7 +19,7 @@ ALocationToSpawn::ALocationToSpawn()
 	MeshComp->AttachTo(RootComponent);
 }
 
-void ALocationToSpawn::SetPosX(int NewPosX) {
+void ALocationToSpawn::SetPosX(float NewPosX) {
 	posX = NewPosX;
 }
 
@@ -27,7 +27,7 @@ float ALocationToSpawn::GetPosX() {
 	return posX;
 }
 
-void ALocationToSpawn::SetPosY(int NewPosY) {
+void ALocationToSpawn::SetPosY(float NewPosY) {
 	posY = NewPosY;
 }
 
