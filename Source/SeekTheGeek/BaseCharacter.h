@@ -60,6 +60,9 @@ private:
 	void LookUpAtRate(float Rate);
 	void TurnAtRate(float Rate);
 
+	void StartCrouch();
+	void StopCrouch();
+
 	//bool pra identificar se o personagem está na área da base
 
 	bool AreaBase = false;

@@ -13,7 +13,7 @@ ABaseCharacter::ABaseCharacter()
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
 	
-	
+
 	
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->AttachTo(GetCapsuleComponent());
@@ -25,7 +25,7 @@ ABaseCharacter::ABaseCharacter()
 	
 
 	GetCharacterMovement()->MaxWalkSpeed = 400;
-	
+	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
@@ -64,6 +64,13 @@ void ABaseCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	InputComponent->BindAction("Run", IE_Pressed, this, &ABaseCharacter::StartRun);
 	InputComponent->BindAction("Run", IE_Released, this, &ABaseCharacter::StopRun);
 
+	InputComponent->BindAction("Crouch", IE_Pressed, this, &ABaseCharacter::StartCrouch);
+	InputComponent->BindAction("Crouch", IE_Released, this, &ABaseCharacter::StopCrouch);
+
+	
+	
+	
+
 	//InputComponent->BindAction("Drop", IE_Pressed, this, &AMyCharacter::DropProjectile);
 }
 
@@ -76,7 +83,6 @@ void ABaseCharacter::MoveForward(float Value) {
 	
 	
 }
-
 
 void ABaseCharacter::MoveRight(float Value) {
 	if (Value != 0.0f)
@@ -103,6 +109,13 @@ void ABaseCharacter::StartRun() {
 }
 void ABaseCharacter::StopRun() {
 	GetCharacterMovement()->MaxWalkSpeed = 400;
+}
+
+void ABaseCharacter::StartCrouch() {
+	Crouch();
+}
+void ABaseCharacter::StopCrouch() {
+	UnCrouch();
 }
 
 
@@ -133,3 +146,4 @@ void ABaseCharacter::SetStamina(int NewStamina) {
 int ABaseCharacter::GetStamina() {
 	return Stamina;
 }
+
