@@ -43,6 +43,7 @@ void ABaseCharacter::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+
 }
 
 // Called to bind functionality to input
@@ -97,10 +98,14 @@ void ABaseCharacter::LookUpAtRate(float Rate)
 }
 
 void ABaseCharacter::StartRun() {
-	if (Stamina<0) {
+	if (Stamina >= 1) {
+
 		GetCharacterMovement()->MaxWalkSpeed = 800;
 	}
+
 }
+
+
 void ABaseCharacter::StopRun() {
 	GetCharacterMovement()->MaxWalkSpeed = 400;
 }
