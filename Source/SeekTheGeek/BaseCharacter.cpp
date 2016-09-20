@@ -22,7 +22,7 @@ ABaseCharacter::ABaseCharacter()
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));  //uspring fiozinho/ligação da camera
 	CameraBoom->AttachTo(RootComponent);
 	PlayerCamera->AttachTo(CameraBoom);
-	
+	CameraBoom->bUsePawnControlRotation = true;
 
 	GetCharacterMovement()->MaxWalkSpeed = 400;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
