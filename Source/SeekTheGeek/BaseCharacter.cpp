@@ -75,7 +75,9 @@ void ABaseCharacter::MoveRight(float Value) {
 }
 
 void ABaseCharacter::StartRun() {
-	GetCharacterMovement()->MaxWalkSpeed = 800;
+	if (Stamina<0) {
+		GetCharacterMovement()->MaxWalkSpeed = 800;
+	}
 }
 void ABaseCharacter::StopRun() {
 	GetCharacterMovement()->MaxWalkSpeed = 400;
@@ -100,4 +102,12 @@ void ABaseCharacter::SetAreaBase(bool NewAreaBase) {
 int ABaseCharacter::GetAreaBase() {
 	return AreaBase;
 
+}
+
+
+void ABaseCharacter::SetStamina(int NewStamina) {
+	Stamina = NewStamina;
+}
+int ABaseCharacter::GetStamina() {
+	return Stamina;
 }

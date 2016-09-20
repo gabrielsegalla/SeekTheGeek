@@ -27,6 +27,12 @@ public:
 	void SetAreaBase(bool NewAreaBase);
 	int GetAreaBase();
 
+	//get e set do stamina para o run
+	void SetStamina(int NewStamina);
+	int GetStamina();
+
+
+
 	
 private:
 	UPROPERTY(EditAnywhere)
@@ -35,6 +41,9 @@ private:
 		UCameraComponent* PlayerCamera;
 	UPROPERTY(EditAnywhere)
 		USpringArmComponent* CameraBoom;
+	//stamina para o run
+	UPROPERTY(EditAnywhere)
+		int Stamina = 0;
 
 
 	void MoveForward(float Value);
