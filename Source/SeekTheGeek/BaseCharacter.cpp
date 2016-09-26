@@ -24,6 +24,7 @@ ABaseCharacter::ABaseCharacter()
 	PlayerCamera->AttachTo(CameraBoom);
 	CameraBoom->bUsePawnControlRotation = true;
 
+
 	GetCharacterMovement()->MaxWalkSpeed = 400;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 

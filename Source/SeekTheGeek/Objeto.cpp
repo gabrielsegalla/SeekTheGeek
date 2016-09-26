@@ -14,6 +14,7 @@ AObjeto::AObjeto()
 	Root->bGenerateOverlapEvents = true;
 	Root->SetCollisionProfileName("PhysicsActor");
 	Root->SetSimulatePhysics(true);
+	Root->SetMassOverrideInKg("Peso", 1.0f, true);
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
