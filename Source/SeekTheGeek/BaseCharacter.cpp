@@ -47,16 +47,16 @@ void ABaseCharacter::Tick( float DeltaTime )
 	if (Run) {
 		Stamina--;
 
-		UE_LOG(LogTemp, Warning, TEXT("Stamina--: %d"), Stamina);
+		//UE_LOG(LogTemp, Warning, TEXT("Stamina--: %d"), Stamina);
 	}
 	else if(!Run) {
-		UE_LOG(LogTemp, Warning, TEXT("Stamina++: %d"), Stamina);
+		//UE_LOG(LogTemp, Warning, TEXT("Stamina++: %d"), Stamina);
 		
 		Stamina++;
 	}
 
-	if (Stamina > 100) {
-		Stamina = 100;
+	if (Stamina > 200) {
+		Stamina = 200;
 	}
 
 	if (Stamina < 0) {

@@ -33,7 +33,7 @@ void AMyHUD::DrawHUD() {
 
 		UGameplayStatics::GetPlayerPawn(this, 0));
 
-	FString StaminaString = FString::Printf(TEXT("%d / 10"), BaseCharacter->GetStamina());
+	FString StaminaString = FString::Printf(TEXT("%d / 200"), BaseCharacter->GetStamina());
 
 	DrawText(StaminaString, FColor::Red, 300, 50, HUDFont);
 
