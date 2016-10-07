@@ -25,7 +25,7 @@ ABaseCharacter::ABaseCharacter()
 	CameraBoom->bUsePawnControlRotation = true;
 
 
-	GetCharacterMovement()->MaxWalkSpeed = 400;
+	GetCharacterMovement()->MaxWalkSpeed = 800;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
@@ -130,13 +130,13 @@ void ABaseCharacter::StartRun() {
 	}
 
 	if (Run) {
-		GetCharacterMovement()->MaxWalkSpeed =800;
+		GetCharacterMovement()->MaxWalkSpeed =1600;
 	}
 	
 }
 void ABaseCharacter::StopRun() {
 	Run = false;
-	GetCharacterMovement()->MaxWalkSpeed = 400;
+	GetCharacterMovement()->MaxWalkSpeed = 800;
 }
 
 void ABaseCharacter::StartCrouch() {
