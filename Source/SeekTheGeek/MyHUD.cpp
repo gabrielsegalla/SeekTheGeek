@@ -33,13 +33,13 @@ void AMyHUD::DrawHUD() {
 
 		UGameplayStatics::GetPlayerPawn(this, 0));
 
-	FString StaminaString = FString::Printf(TEXT("%d / 200"), BaseCharacter->GetStamina());
+	/*FString StaminaString = FString::Printf(TEXT("%d / 200"), BaseCharacter->GetStamina());
 
 	DrawText(StaminaString, FColor::Red, 300, 50, HUDFont);
 
 	DrawTexture(MyTexture, 200, 150, BaseCharacter->GetStamina(), MyTexture->GetSizeY(), 200, 200, BaseCharacter->GetStamina(), MyTexture->GetSizeY(), FLinearColor::White, EBlendMode::BLEND_Opaque, 1.0, false, 1.0f, FVector2D::ZeroVector);
 
-
+	*/
 
 
 }

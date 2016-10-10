@@ -4,36 +4,17 @@
 #include "LocationToSpawn.h"
 
 
+
 // Sets default values
 ALocationToSpawn::ALocationToSpawn()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-	Root = CreateDefaultSubobject<USphereComponent>(TEXT("Root"));
-	Root->bGenerateOverlapEvents = true;
-	Root->SetCollisionProfileName("OverlapAllDynamic");
-	RootComponent = Root;
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = false;
 
-	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	MeshComp->SetCollisionProfileName("NoCollision");
-	MeshComp->AttachTo(RootComponent);
+
 }
 
-void ALocationToSpawn::SetPosX(float NewPosX) {
-	posX = NewPosX;
-}
 
-float ALocationToSpawn::GetPosX() {
-	return posX;
-}
-
-void ALocationToSpawn::SetPosY(float NewPosY) {
-	posY = NewPosY;
-}
-
-float ALocationToSpawn::GetPosY() {
-	return posY;
-}
 
 // Called when the game starts or when spawned
 void ALocationToSpawn::BeginPlay()

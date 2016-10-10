@@ -17,7 +17,7 @@ AParedes::AParedes()
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	MeshComp->SetCollisionProfileName("NoCollision");
+	MeshComp->SetCollisionProfileName("BlockAll");
 	MeshComp->AttachTo(RootComponent);
 
 
