@@ -6,7 +6,7 @@ public class SeekTheGeek : ModuleRules
 {
 	public SeekTheGeek(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","UMG","Slate","SlateCore"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
