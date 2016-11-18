@@ -42,7 +42,7 @@ ABaseCharacter::ABaseCharacter()
 	}
 	bReplicateMovement = true;
 
-	AutoPossessPlayer = EAutoReceiveInput::Player0;
+	//AutoPossessPlayer = EAutoReceiveInput::Player0;
 
 }
 
