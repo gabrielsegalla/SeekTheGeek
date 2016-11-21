@@ -63,6 +63,9 @@ private:
 	void StartCrouch();
 	void StopCrouch();
 
+	void Pause();
+	TSubclassOf<class UUserWidget> UserWidget;
+
 	//bool pra identificar se o personagem está na área da base
 
 	bool AreaBase = false;

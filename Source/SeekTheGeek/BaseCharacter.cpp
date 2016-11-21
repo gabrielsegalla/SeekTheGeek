@@ -2,6 +2,13 @@
 
 #include "SeekTheGeek.h"
 #include "BaseCharacter.h"
+#include "Runtime/UMG/Public/UMG.h"
+#include "Runtime/UMG/Public/UMGStyle.h"
+#include "Runtime/UMG/Public/IUMGModule.h"
+#include "Runtime/UMG/Public/Slate/SObjectWidget.h"
+#include "Runtime/UMG/Public/Blueprint/UserWidget.h"
+#include "Runtime/UMG/Public/Blueprint/WidgetBlueprintLibrary.h"
+#include "Blueprint/UserWidget.h"
 
 
 // Sets default values
@@ -28,7 +35,14 @@ ABaseCharacter::ABaseCharacter()
 	GetCharacterMovement()->MaxWalkSpeed = 800;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 
-	AutoPossessPlayer = EAutoReceiveInput::Player0;
+	ConstructorHelpers::FClassFinder<UUserWidget>Widget(TEXT("WidgetBlueprint'/Game/Blueprint/pause.pause_C'"));
+
+	if (Widget.Succeeded()) {
+		UserWidget = Widget.Class;
+	}
+	bReplicateMovement = true;
+
+	//AutoPossessPlayer = EAutoReceiveInput::Player0;
 
 }
 
@@ -89,7 +103,10 @@ void ABaseCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	InputComponent->BindAction("Crouch", IE_Pressed, this, &ABaseCharacter::StartCrouch);
 	InputComponent->BindAction("Crouch", IE_Released, this, &ABaseCharacter::StopCrouch);
 
-	
+	InputComponent->BindAction("Pause", IE_Released, this, &ABaseCharacter::Pause);
+
+	bReplicates = true;
+	bReplicateMovement = true;
 	
 	
 
@@ -175,3 +192,18 @@ int ABaseCharacter::GetStamina() {
 	return Stamina;
 }
 
+
+void ABaseCharacter::Pause() {
+	UWorld* World = GetWorld();
+	if (World != nullptr) {
+		APlayerController * PlayerController = UGameplayStatics::GetPlayerController(World, 0);
+		if (PlayerController != nullptr && UserWidget != NULL) {
+			PlayerController->SetPause(true);
+			UUserWidget *UserW = UWidgetBlueprintLibrary::Create(World, UserWidget, PlayerController);
+			if (UserW != nullptr) {
+				UserW->AddToViewport();
+				PlayerController->bShowMouseCursor = true;
+			}
+		}
+	}
+}
