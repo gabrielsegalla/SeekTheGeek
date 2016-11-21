@@ -20,10 +20,15 @@ ABaseCharacter::ABaseCharacter()
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
 	
-
+	ConstructorHelpers::FObjectFinder<USkeletalMesh>
+		SkeletalMesh(TEXT("SkeletalMesh'/Engine/EngineMeshes/SkeletalCube.SkeletalCube'"));
+	if (SkeletalMesh.Succeeded()) {
+		GetMesh()->SetSkeletalMesh(SkeletalMesh.Object);
+	}
 	
-	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	MeshComp->AttachTo(GetCapsuleComponent());
+	GetMesh()->SetWorldLocation(FVector(0.0f, 0.0f, -80.0f));
+	GetMesh()->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
+	GetMesh()->SetWorldRotation(FRotator(0.0f, -90.0f, 0.0f));
 	
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));  //uspring fiozinho/ligação da camera
