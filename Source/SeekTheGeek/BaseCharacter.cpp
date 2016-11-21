@@ -20,15 +20,20 @@ ABaseCharacter::ABaseCharacter()
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
 	
+	GetCapsuleComponent()->SetCapsuleHalfHeight(34.0);
+	GetCapsuleComponent()->SetCapsuleRadius(19.0);
 	ConstructorHelpers::FObjectFinder<USkeletalMesh>
-		SkeletalMesh(TEXT("SkeletalMesh'/Engine/EngineMeshes/SkeletalCube.SkeletalCube'"));
+		SkeletalMesh(TEXT("SkeletalMesh'/Game/Personagens/beabeeteste.beabeeteste'"));
 	if (SkeletalMesh.Succeeded()) {
 		GetMesh()->SetSkeletalMesh(SkeletalMesh.Object);
 	}
+
 	
-	GetMesh()->SetWorldLocation(FVector(0.0f, 0.0f, -80.0f));
+	GetMesh()->SetWorldLocation(FVector(18.0f, 0.0f, -31.0f));
 	GetMesh()->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
-	GetMesh()->SetWorldRotation(FRotator(0.0f, -90.0f, 0.0f));
+	GetMesh()->SetWorldRotation(FRotator(0.0f, -89.999992f, 0.0f));
+//	GetMesh()->SetCollisionProfileName("Pawn");
+	GetMesh()->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
 	
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));  //uspring fiozinho/ligação da camera
