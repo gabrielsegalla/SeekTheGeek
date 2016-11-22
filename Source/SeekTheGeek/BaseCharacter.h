@@ -46,6 +46,12 @@ private:
 	void MoveRight(float Value);
 	void StartRun();
 	void StopRun();
+<<<<<<< HEAD
+
+	void FoundMyFriend();
+
+=======
+>>>>>>> 6f053432a7060ee3b91c84d431a5cbf7fb20d0c0
 	void Turn(float Value);
 	void LookUp(float Value);
 	void LookUpAtRate(float Rate);

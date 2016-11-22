@@ -152,4 +152,10 @@ void ABaseCharacter::Pause() {
 			}
 		}
 	}
+<<<<<<< HEAD
 }
+
+
+=======
+}
+>>>>>>> 6f053432a7060ee3b91c84d431a5cbf7fb20d0c0
