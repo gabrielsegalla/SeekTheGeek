@@ -30,7 +30,7 @@ APowerUp::APowerUp()
 	MeshComp->AttachTo(RootComponent);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>
-		Mesh(TEXT("StaticMesh'/Game/botijao.botijao'"));
+		Mesh(TEXT("StaticMesh'/Game/Objetos/bolo/bolo.bolo'"));
 
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);

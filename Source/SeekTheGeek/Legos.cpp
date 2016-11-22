@@ -30,7 +30,7 @@ ALegos::ALegos()
 	MeshComp->AttachTo(RootComponent);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>
-		Mesh(TEXT("StaticMesh'/Game/botijao.botijao'"));
+		Mesh(TEXT("StaticMesh'/Game/Objetos/Lego/legopilha.legopilha'"));
 	
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
@@ -67,7 +67,6 @@ void ALegos::Tick( float DeltaTime )
 
 	if (Char->GetOnLego()) {
 		Timer++;
-		Char->GetCharacterMovement()->MaxWalkSpeed = 300;
 
 		UE_LOG(LogTemp, Warning, (TEXT("PISOU NO LEGO")), Timer);
 	}
@@ -78,7 +77,6 @@ void ALegos::Tick( float DeltaTime )
 		Timer = 0;
 
 		Char->SetOnLego(false);
-		Char->GetCharacterMovement()->MaxWalkSpeed = 800;
 
 		UE_LOG(LogTemp, Warning, TEXT("Zerando Timer"));
 
