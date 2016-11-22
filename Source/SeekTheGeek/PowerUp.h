@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Legos.generated.h"
+#include "PowerUp.generated.h"
 
 UCLASS()
-class SEEKTHEGEEK_API ALegos : public AActor
+class SEEKTHEGEEK_API APowerUp : public AActor
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	ALegos();
+	APowerUp();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -20,10 +20,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
-
-
-
 private:
+
+	int Timer = 0;
+
+
+
 	UPROPERTY(EditAnywhere)
 		UShapeComponent* Root;
 
@@ -36,17 +38,6 @@ private:
 
 	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-
-	//bools para identificar se o lego está para ser coletado ou causar slow
-	bool LegoColect;
-	bool LegoDamage;
-
-	int Timer = 0;
-
-
-	//movimentação do projétil
-	UProjectileMovementComponent* ProjectileMovement;
 
 
 };
