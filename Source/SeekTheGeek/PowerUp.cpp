@@ -1,15 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SeekTheGeek.h"
-#include "Legos.h"
+#include "PowerUp.h"
 #include "BaseCharacter.h"
 
 
 
 // Sets default values
-ALegos::ALegos()
+APowerUp::APowerUp()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
@@ -20,7 +20,7 @@ ALegos::ALegos()
 
 	Root->bGenerateOverlapEvents = true;
 	Root->SetCollisionProfileName("OverlapAllDynamic");
-	Root->OnComponentBeginOverlap.AddDynamic(this, &ALegos::OnOverlapBegin);
+	Root->OnComponentBeginOverlap.AddDynamic(this, &APowerUp::OnOverlapBegin);
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
@@ -31,7 +31,7 @@ ALegos::ALegos()
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>
 		Mesh(TEXT("StaticMesh'/Game/botijao.botijao'"));
-	
+
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
 
@@ -40,65 +40,55 @@ ALegos::ALegos()
 	//MeshComp->SetWorldScale3D(FVector(4.0f, 4.0f, 4.0f));
 	MeshComp->AttachTo(RootComponent);
 
-	//definir tempo de vida
-	InitialLifeSpan = 30.0f;
-
-	//movimenta o projétil
-	//ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
-	//indica onde o update será feito
-	//ProjectileMovement->UpdatedComponent = Root;
 }
 
 // Called when the game starts or when spawned
-void ALegos::BeginPlay()
+void APowerUp::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
 }
 
 // Called every frame
-void ALegos::Tick( float DeltaTime )
+void APowerUp::Tick(float DeltaTime)
 {
-	Super::Tick( DeltaTime );
+	Super::Tick(DeltaTime);
 
 	ABaseCharacter* Char = Cast<ABaseCharacter>(UGameplayStatics::GetPlayerPawn(this, 0));
 
-
-	if (Char->GetOnLego()) {
+	if (Char->GetPowerUp()) {
 		Timer++;
-		Char->GetCharacterMovement()->MaxWalkSpeed = 300;
 
-		UE_LOG(LogTemp, Warning, (TEXT("PISOU NO LEGO")), Timer);
+		Char->GetCharacterMovement()->MaxWalkSpeed += 1000;
+		UE_LOG(LogTemp, Warning, TEXT("Timer: %d"), Timer);
 	}
-
 
 	if (Timer == 200) {
 
 		Timer = 0;
 
-		Char->SetOnLego(false);
+		Char->SetPowerUp(false);
 		Char->GetCharacterMovement()->MaxWalkSpeed = 800;
 
 		UE_LOG(LogTemp, Warning, TEXT("Zerando Timer"));
 
 	}
+
+
 }
 
 
-void ALegos::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+void APowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ABaseCharacter::StaticClass())) {
 
 		ABaseCharacter* Char = Cast<ABaseCharacter>(OtherActor);
 
-		//if (OtherActor != Char) {
+		UE_LOG(LogTemp, Warning, (TEXT("Pegou power-up")));
 
-			UE_LOG(LogTemp, Warning, (TEXT("Pisou no lego")));
-		
+		Char->SetPowerUp(true);
 
-			Char->SetOnLego(true);
-		//}
+
 
 	}
 
