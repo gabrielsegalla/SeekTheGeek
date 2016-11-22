@@ -55,6 +55,8 @@ private:
 	void StartRun();
 	void StopRun();
 
+	void FoundMyFriend();
+
 	void Turn(float Value);
 	void LookUp(float Value);
 	void LookUpAtRate(float Rate);
