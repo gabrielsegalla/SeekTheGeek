@@ -68,7 +68,7 @@ void ALegos::Tick( float DeltaTime )
 	if (Char->GetOnLego()) {
 		Timer++;
 
-		UE_LOG(LogTemp, Warning, (TEXT("PISOU NO LEGO")), Timer);
+		//UE_LOG(LogTemp, Warning, (TEXT("PISOU NO LEGO")), Timer);
 	}
 
 
@@ -92,7 +92,7 @@ void ALegos::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 
 		//if (OtherActor != Char) {
 
-			UE_LOG(LogTemp, Warning, (TEXT("Pisou no lego")));
+			//UE_LOG(LogTemp, Warning, (TEXT("Pisou no lego")));
 		
 
 			Char->SetOnLego(true);
