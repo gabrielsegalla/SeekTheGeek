@@ -1,39 +1,32 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
-
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
-
 UCLASS()
 class SEEKTHEGEEK_API ABaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
-
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
-
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
 	// Called every frame
-	virtual void Tick( float DeltaSeconds ) override;
-
+	virtual void Tick(float DeltaSeconds) override;
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-
-	//get e set do Life
-	void SetAreaBase(bool NewAreaBase);
-	int GetAreaBase();
-
-	//get e set do stamina para o run
-	void SetStamina(int NewStamina);
-	int GetStamina();
-
-
-
 	
+	//GETTERS E SETTERS
+	FORCEINLINE bool GetAreaBase() const { return AreaBase; }
+	FORCEINLINE void ABaseCharacter::SetAreaBase(bool NewAreaBase) { AreaBase = NewAreaBase; }
+
+	FORCEINLINE bool GetPowerUp() const { return PowerUp; }
+	FORCEINLINE void ABaseCharacter::SetPowerUp(bool NewPowerUp) { PowerUp = NewPowerUp; }
+
+	FORCEINLINE bool GetOnLego() const { return OnLego; }
+	FORCEINLINE void ABaseCharacter::SetOnLego(bool NewOnLego) { OnLego = NewOnLego; }
+
+	FORCEINLINE int GetStamina() const { return Stamina; }
+	FORCEINLINE void ABaseCharacter::SetStamina(int NewStamina) { Stamina = NewStamina; }
+
 private:
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* MeshComp;
@@ -49,30 +42,42 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseTurnRate;
 
-
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void StartRun();
 	void StopRun();
+<<<<<<< HEAD
 
+	void FoundMyFriend();
+
+=======
+>>>>>>> 6f053432a7060ee3b91c84d431a5cbf7fb20d0c0
 	void Turn(float Value);
 	void LookUp(float Value);
 	void LookUpAtRate(float Rate);
 	void TurnAtRate(float Rate);
-
 	void StartCrouch();
 	void StopCrouch();
-
 	void Pause();
+
 	TSubclassOf<class UUserWidget> UserWidget;
 
-	//bool pra identificar se o personagem está na área da base
 
+	
+
+
+	//bool pra identificar se o personagem está na área da base
 	bool AreaBase = false;
+
+	//bool para corrida
 	bool Run = false;
 
+	//bool para power up
+	bool PowerUp = false;
 
+	//bool para lego
+	bool OnLego = false;
 
-
-
+	//bool para teleport
+	bool Teleporting = false;
 };
