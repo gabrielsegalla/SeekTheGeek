@@ -18,6 +18,7 @@ ABaseCharacter::ABaseCharacter()
 	BaseLookUpRate = 45.f;
 	GetCapsuleComponent()->SetCapsuleHalfHeight(34.0);
 	GetCapsuleComponent()->SetCapsuleRadius(19.0);
+	
 	ConstructorHelpers::FObjectFinder<USkeletalMesh>
 		SkeletalMesh(TEXT("SkeletalMesh'/Game/Personagens/beabeeteste.beabeeteste'"));
 	if (SkeletalMesh.Succeeded()) {
@@ -26,13 +27,18 @@ ABaseCharacter::ABaseCharacter()
 	GetMesh()->SetWorldLocation(FVector(18.0f, 0.0f, -31.0f));
 	GetMesh()->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -89.999992f, 0.0f));
+	
+
+
+	
 
 	// GetMesh()->SetCollisionProfileName("Pawn");
 
 	GetMesh()->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
-	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
+		PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom")); //uspring fiozinho/ligação da camera
 	CameraBoom->AttachTo(RootComponent);
+
 	PlayerCamera->AttachTo(CameraBoom);
 	CameraBoom->bUsePawnControlRotation = true;
 	GetCharacterMovement()->MaxWalkSpeed = 400;
@@ -48,10 +54,13 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	Find();
 }
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
 {
+
+
 	Super::Tick(DeltaTime);
 	if (Run) {
 		Stamina--;
@@ -152,10 +161,6 @@ void ABaseCharacter::Pause() {
 			}
 		}
 	}
-<<<<<<< HEAD
+
 }
 
-
-=======
-}
->>>>>>> 6f053432a7060ee3b91c84d431a5cbf7fb20d0c0
