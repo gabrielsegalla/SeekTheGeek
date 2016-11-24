@@ -31,6 +31,12 @@ public:
 	FORCEINLINE int GetStamina() const { return Stamina; }
 	FORCEINLINE void ABaseCharacter::SetStamina(int NewStamina) { Stamina = NewStamina; }
 
+	FORCEINLINE bool GetFounded() const { return Founded; }
+	FORCEINLINE void ABaseCharacter::SetFounded(bool NewFounded) { Founded = NewFounded; }
+
+	FORCEINLINE bool GetFoundAnother() const { return FoundAnother; }
+	FORCEINLINE void ABaseCharacter::SetFoundAnother(bool NewFoundAnother) { FoundAnother = NewFoundAnother; }
+
 private:
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* MeshComp;
@@ -51,15 +57,17 @@ private:
 		FComponentOnClickedSignature OnClicked;
 
 
+	//área de colisão para pegar outro char
+	USphereComponent* CollectCollisionComp;
+
+	//lista para coletagem de poção
+	TArray<class ABaseCharacter*> CharFounded;
+
+
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void StartRun();
 	void StopRun();
-	
-
-	void FoundMyFriend();
-
-
 	void Turn(float Value);
 	void LookUp(float Value);
 	void LookUpAtRate(float Rate);
@@ -68,7 +76,14 @@ private:
 	void StopCrouch();
 	void Pause();
 
+	//variáveis de encontrar/ ser encontrado
+
+	bool Founded;
+	bool FoundAnother;
+
 	TSubclassOf<class UUserWidget> UserWidget;
+
+
 
 
 	

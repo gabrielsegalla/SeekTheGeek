@@ -161,6 +161,4 @@ void ABaseCharacter::Pause() {
 			}
 		}
 	}
-
 }
-
