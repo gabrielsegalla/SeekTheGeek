@@ -8,7 +8,7 @@ public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
 
-	virtual int Find();
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	// Called every frame
@@ -16,8 +16,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
-	
-	
+
+
 	//GETTERS E SETTERS
 	FORCEINLINE bool GetAreaBase() const { return AreaBase; }
 	FORCEINLINE void ABaseCharacter::SetAreaBase(bool NewAreaBase) { AreaBase = NewAreaBase; }
@@ -31,6 +31,12 @@ public:
 	FORCEINLINE int GetStamina() const { return Stamina; }
 	FORCEINLINE void ABaseCharacter::SetStamina(int NewStamina) { Stamina = NewStamina; }
 
+	FORCEINLINE bool GetFounded() const { return Founded; }
+	FORCEINLINE void ABaseCharacter::SetFounded(bool NewFounded) { Founded = NewFounded; }
+
+	FORCEINLINE bool GetFoundAnother() const { return FoundAnother; }
+	FORCEINLINE void ABaseCharacter::SetFoundAnother(bool NewFoundAnother) { FoundAnother = NewFoundAnother; }
+
 private:
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* MeshComp;
@@ -41,25 +47,25 @@ private:
 	//stamina para o run
 	UPROPERTY(EditAnywhere)
 		int Stamina = 200;
-	UPROPERTY(EditAnywhere)
-		UBoxComponent* RangeToFind;
+
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseLookUpRate;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseTurnRate;
-	UPROPERTY(BlueprintAssignable, Category = "Input|Mouse Input")
-		FComponentOnClickedSignature OnClicked;
+	
+
+
+	//área de colisão para pegar outro char
+	USphereComponent* CollectCollisionComp;
+
+	//lista para coletagem de poção
+	TArray<class ABaseCharacter*> CharFounded;
 
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void StartRun();
 	void StopRun();
-	
-
-	void FoundMyFriend();
-
-
 	void Turn(float Value);
 	void LookUp(float Value);
 	void LookUpAtRate(float Rate);
@@ -68,10 +74,17 @@ private:
 	void StopCrouch();
 	void Pause();
 
+	//variáveis de encontrar/ ser encontrado
+
+	bool Founded;
+	bool FoundAnother;
+
 	TSubclassOf<class UUserWidget> UserWidget;
 
+	USoundCue* walkSound;
+	UAudioComponent* AudioComp;
 
-	
+
 
 
 	//bool pra identificar se o personagem está na área da base

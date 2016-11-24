@@ -18,24 +18,24 @@ ABaseCharacter::ABaseCharacter()
 	BaseLookUpRate = 45.f;
 	GetCapsuleComponent()->SetCapsuleHalfHeight(34.0);
 	GetCapsuleComponent()->SetCapsuleRadius(19.0);
-	
+
 	ConstructorHelpers::FObjectFinder<USkeletalMesh>
-		SkeletalMesh(TEXT("SkeletalMesh'/Game/Personagens/beabeeteste.beabeeteste'"));
+		SkeletalMesh(TEXT("SkeletalMesh'/Game/Personagens/Tobissauro/tobissauro.tobissauro'"));
 	if (SkeletalMesh.Succeeded()) {
 		GetMesh()->SetSkeletalMesh(SkeletalMesh.Object);
 	}
 	GetMesh()->SetWorldLocation(FVector(18.0f, 0.0f, -31.0f));
 	GetMesh()->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -89.999992f, 0.0f));
-	
 
 
-	
+
+
 
 	// GetMesh()->SetCollisionProfileName("Pawn");
 
 	GetMesh()->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
-		PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
+	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom")); //uspring fiozinho/ligação da camera
 	CameraBoom->AttachTo(RootComponent);
 
@@ -47,6 +47,19 @@ ABaseCharacter::ABaseCharacter()
 	if (Widget.Succeeded()) {
 		UserWidget = Widget.Class;
 	}
+
+	ConstructorHelpers::FObjectFinder<USoundCue>
+		SoundCue(TEXT("SoundWave'/Game/Sound/Creepy_Laugh-Adam_Webb-235643261.Creepy_Laugh-Adam_Webb-235643261'"));
+	if (SoundCue.Succeeded()) {
+		walkSound = SoundCue.Object;
+	}
+
+	AudioComp = CreateDefaultSubobject<UAudioComponent>
+		(TEXT("AudioComp"));
+	AudioComp->bAutoActivate = false;
+	AudioComp->AttachTo(GetMesh());
+	
+	bReplicates = true;
 	bReplicateMovement = true;
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
@@ -54,7 +67,7 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	Find();
+
 }
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
@@ -104,6 +117,8 @@ void ABaseCharacter::MoveForward(float Value) {
 	{
 		FVector Forward(1, 0, 0);
 		AddMovementInput(GetActorForwardVector(), Value);
+		AudioComp->SetSound(walkSound);
+		AudioComp->Play();
 	}
 }
 void ABaseCharacter::MoveRight(float Value) {
@@ -111,6 +126,8 @@ void ABaseCharacter::MoveRight(float Value) {
 	{
 		FVector Right(0, 1, 0);
 		AddMovementInput(GetActorRightVector(), Value);
+		AudioComp->SetSound(walkSound);
+		AudioComp->Play();
 	}
 }
 void ABaseCharacter::TurnAtRate(float Rate)
@@ -161,6 +178,4 @@ void ABaseCharacter::Pause() {
 			}
 		}
 	}
-
 }
-
