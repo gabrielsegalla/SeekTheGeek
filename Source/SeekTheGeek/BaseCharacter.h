@@ -48,13 +48,8 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseTurnRate;
 
-
-
-	//área de colisão para pegar outro char
-	USphereComponent* FoundCollisionComp;
-
-	//lista para coletagem de poção
-	TArray<class ALegos*> TodosCharsEncontrados;
+	UFUNCTION()
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 
 	void MoveForward(float Value);
@@ -70,8 +65,6 @@ private:
 	void Pause();
 
 	//variáveis de encontrar/ ser encontrado
-
-	void FoundingAChar();
 
 	bool Found;
 

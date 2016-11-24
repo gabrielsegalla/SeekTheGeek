@@ -8,6 +8,7 @@
 #include "Runtime/UMG/Public/Blueprint/WidgetBlueprintLibrary.h"
 #include "Blueprint/UserWidget.h"
 #include "Legos.h"
+#include "Paredes.h"
 
 // Sets default values
 ABaseCharacter::ABaseCharacter()
@@ -29,9 +30,6 @@ ABaseCharacter::ABaseCharacter()
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -89.999992f, 0.0f));
 	
 
-
-	
-
 	// GetMesh()->SetCollisionProfileName("Pawn");
 
 	GetMesh()->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
@@ -49,6 +47,8 @@ ABaseCharacter::ABaseCharacter()
 	}
 	bReplicateMovement = true;
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
+
+
 }
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
@@ -162,26 +162,12 @@ void ABaseCharacter::Pause() {
 	}
 }
 
-void ABaseCharacter::FoundingAChar() {
+void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
-	//lista dos chars encontrados
-	TArray<AActor*>CharEncontrado;
-
-	//para coletar, pega os atores e joga pra lista
-	FoundCollisionComp->GetOverlappingActors(CharEncontrado);
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ALegos::StaticClass())) {
 
 
-	for (int i = 0; i < CharEncontrado.Num(); i++) {
-
-		ALegos* Lego = Cast <ALegos>(CharEncontrado[i]);
-		if (CharEncontrado[i]->IsA(ALegos::StaticClass())) {
-
-
-			TodosCharsEncontrados.Add(Lego);
-
-			UE_LOG(LogTemp, Warning, TEXT("Pego!"));
-
-		}
+		UE_LOG(LogTemp, Warning, TEXT("Pego!"));
 
 	}
 }
