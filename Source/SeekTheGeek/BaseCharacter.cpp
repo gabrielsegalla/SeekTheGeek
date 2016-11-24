@@ -54,7 +54,6 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	Find();
 }
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
@@ -160,5 +159,29 @@ void ABaseCharacter::Pause() {
 				PlayerController->bShowMouseCursor = true;
 			}
 		}
+	}
+}
+
+void ABaseCharacter::FoundingAChar() {
+
+	//lista dos chars encontrados
+	TArray<AActor*>CharEncontrado;
+
+	//para coletar, pega os atores e joga pra lista
+	FoundCollisionComp->GetOverlappingActors(CharEncontrado);
+
+
+	for (int i = 0; i < CharEncontrado.Num(); i++) {
+
+		ALegos* Lego = Cast <ALegos>(CharEncontrado[i]);
+		if (CharEncontrado[i]->IsA(ALegos::StaticClass())) {
+
+
+			TodosCharsEncontrados.Add(Lego);
+
+			UE_LOG(LogTemp, Warning, TEXT("Pego!"));
+
+		}
+
 	}
 }

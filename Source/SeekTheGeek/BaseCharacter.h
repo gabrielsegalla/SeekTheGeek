@@ -7,16 +7,12 @@ class SEEKTHEGEEK_API ABaseCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
-
-	virtual int Find();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-
-	
 	
 	//GETTERS E SETTERS
 	FORCEINLINE bool GetAreaBase() const { return AreaBase; }
@@ -31,11 +27,9 @@ public:
 	FORCEINLINE int GetStamina() const { return Stamina; }
 	FORCEINLINE void ABaseCharacter::SetStamina(int NewStamina) { Stamina = NewStamina; }
 
-	FORCEINLINE bool GetFounded() const { return Founded; }
-	FORCEINLINE void ABaseCharacter::SetFounded(bool NewFounded) { Founded = NewFounded; }
+	FORCEINLINE bool GetFound() const { return Found; }
+	FORCEINLINE void ABaseCharacter::SetFound(bool NewFound) { Found = NewFound; }
 
-	FORCEINLINE bool GetFoundAnother() const { return FoundAnother; }
-	FORCEINLINE void ABaseCharacter::SetFoundAnother(bool NewFoundAnother) { FoundAnother = NewFoundAnother; }
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -53,15 +47,14 @@ private:
 		float BaseLookUpRate;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseTurnRate;
-	UPROPERTY(BlueprintAssignable, Category = "Input|Mouse Input")
-		FComponentOnClickedSignature OnClicked;
+
 
 
 	//área de colisão para pegar outro char
-	USphereComponent* CollectCollisionComp;
+	USphereComponent* FoundCollisionComp;
 
 	//lista para coletagem de poção
-	TArray<class ABaseCharacter*> CharFounded;
+	TArray<class ALegos*> TodosCharsEncontrados;
 
 
 	void MoveForward(float Value);
@@ -78,16 +71,14 @@ private:
 
 	//variáveis de encontrar/ ser encontrado
 
-	bool Founded;
-	bool FoundAnother;
+	void FoundingAChar();
+
+	bool Found;
 
 	TSubclassOf<class UUserWidget> UserWidget;
 
 
-
-
 	
-
 
 	//bool pra identificar se o personagem está na área da base
 	bool AreaBase = false;
@@ -103,4 +94,5 @@ private:
 
 	//bool para teleport
 	bool Teleporting = false;
+
 };
