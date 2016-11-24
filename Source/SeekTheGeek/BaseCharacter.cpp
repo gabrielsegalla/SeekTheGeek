@@ -152,10 +152,21 @@ void ABaseCharacter::Pause() {
 			}
 		}
 	}
-<<<<<<< HEAD
 }
 
 
-=======
+void ABaseCharacter::FoundingAnother() {
+
+	TArray<AActor*>CharEncontrado;
+
+	CollectCollisionComp->GetOverlappingActors(CharEncontrado);
+
+	ABaseCharacter* Char = Cast<ABaseCharacter>(UGameplayStatics::GetPlayerPawn(this, 0));
+
+
+
 }
->>>>>>> 6f053432a7060ee3b91c84d431a5cbf7fb20d0c0
+
+void ABaseCharacter::BeingFound() {
+
+}
