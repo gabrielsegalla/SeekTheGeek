@@ -89,15 +89,8 @@ void ALegos::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ABaseCharacter::StaticClass())) {
 
 		ABaseCharacter* Char = Cast<ABaseCharacter>(OtherActor);
-
-		//if (OtherActor != Char) {
-
-			//UE_LOG(LogTemp, Warning, (TEXT("Pisou no lego")));
 		
-
 			Char->SetOnLego(true);
-		//}
-
 	}
 
 }
