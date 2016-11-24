@@ -7,12 +7,16 @@ class SEEKTHEGEEK_API ABaseCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
+
+	virtual int Find();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+
+	
 	
 	//GETTERS E SETTERS
 	FORCEINLINE bool GetAreaBase() const { return AreaBase; }
@@ -43,10 +47,15 @@ private:
 	//stamina para o run
 	UPROPERTY(EditAnywhere)
 		int Stamina = 200;
+	UPROPERTY(EditAnywhere)
+		UBoxComponent* RangeToFind;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseLookUpRate;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseTurnRate;
+	UPROPERTY(BlueprintAssignable, Category = "Input|Mouse Input")
+		FComponentOnClickedSignature OnClicked;
+
 
 	//área de colisão para pegar outro char
 	USphereComponent* CollectCollisionComp;
@@ -59,11 +68,6 @@ private:
 	void MoveRight(float Value);
 	void StartRun();
 	void StopRun();
-
-	void FoundingAnother();
-	void BeingFound();
-
-
 	void Turn(float Value);
 	void LookUp(float Value);
 	void LookUpAtRate(float Rate);
