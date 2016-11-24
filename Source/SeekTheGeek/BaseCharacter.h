@@ -7,17 +7,24 @@ class SEEKTHEGEEK_API ABaseCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
+<<<<<<< HEAD
 
-	virtual int Find();
+	
+=======
+>>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+<<<<<<< HEAD
 
+
+
+=======
 	
-	
+>>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
 	//GETTERS E SETTERS
 	FORCEINLINE bool GetAreaBase() const { return AreaBase; }
 	FORCEINLINE void ABaseCharacter::SetAreaBase(bool NewAreaBase) { AreaBase = NewAreaBase; }
@@ -31,11 +38,17 @@ public:
 	FORCEINLINE int GetStamina() const { return Stamina; }
 	FORCEINLINE void ABaseCharacter::SetStamina(int NewStamina) { Stamina = NewStamina; }
 
+<<<<<<< HEAD
 	FORCEINLINE bool GetFounded() const { return Founded; }
 	FORCEINLINE void ABaseCharacter::SetFounded(bool NewFounded) { Founded = NewFounded; }
 
 	FORCEINLINE bool GetFoundAnother() const { return FoundAnother; }
 	FORCEINLINE void ABaseCharacter::SetFoundAnother(bool NewFoundAnother) { FoundAnother = NewFoundAnother; }
+=======
+	FORCEINLINE bool GetFound() const { return Found; }
+	FORCEINLINE void ABaseCharacter::SetFound(bool NewFound) { Found = NewFound; }
+
+>>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -47,14 +60,13 @@ private:
 	//stamina para o run
 	UPROPERTY(EditAnywhere)
 		int Stamina = 200;
-	UPROPERTY(EditAnywhere)
-		UBoxComponent* RangeToFind;
+
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseLookUpRate;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		float BaseTurnRate;
-	UPROPERTY(BlueprintAssignable, Category = "Input|Mouse Input")
-		FComponentOnClickedSignature OnClicked;
+<<<<<<< HEAD
+	
 
 
 	//área de colisão para pegar outro char
@@ -62,6 +74,11 @@ private:
 
 	//lista para coletagem de poção
 	TArray<class ABaseCharacter*> CharFounded;
+=======
+
+	UFUNCTION()
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+>>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
 
 
 	void MoveForward(float Value);
@@ -78,15 +95,18 @@ private:
 
 	//variáveis de encontrar/ ser encontrado
 
+<<<<<<< HEAD
 	bool Founded;
 	bool FoundAnother;
+=======
+	bool Found;
+>>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
 
 	TSubclassOf<class UUserWidget> UserWidget;
 
+	USoundCue* walkSound;
+	UAudioComponent* AudioComp;
 
-
-
-	
 
 
 	//bool pra identificar se o personagem está na área da base
@@ -103,4 +123,5 @@ private:
 
 	//bool para teleport
 	bool Teleporting = false;
+
 };

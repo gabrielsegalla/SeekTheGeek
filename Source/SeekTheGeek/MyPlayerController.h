@@ -13,8 +13,12 @@ class SEEKTHEGEEK_API AMyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+<<<<<<< HEAD
 
 	
+	
+=======
+>>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
 	
 	
 };
