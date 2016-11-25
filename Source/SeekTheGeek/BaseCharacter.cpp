@@ -19,21 +19,21 @@ ABaseCharacter::ABaseCharacter()
 	BaseLookUpRate = 45.f;
 	GetCapsuleComponent()->SetCapsuleHalfHeight(34.0);
 	GetCapsuleComponent()->SetCapsuleRadius(19.0);
-	
+
 	ConstructorHelpers::FObjectFinder<USkeletalMesh>
-		SkeletalMesh(TEXT("SkeletalMesh'/Game/Personagens/beabeeteste.beabeeteste'"));
+		SkeletalMesh(TEXT("SkeletalMesh'/Game/Personagens/Tobissauro/tobissauro.tobissauro'"));
 	if (SkeletalMesh.Succeeded()) {
 		GetMesh()->SetSkeletalMesh(SkeletalMesh.Object);
 	}
 	GetMesh()->SetWorldLocation(FVector(18.0f, 0.0f, -31.0f));
 	GetMesh()->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -89.999992f, 0.0f));
-	
+
 
 	// GetMesh()->SetCollisionProfileName("Pawn");
 
 	GetMesh()->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
-		PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
+	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom")); //uspring fiozinho/ligação da camera
 	CameraBoom->AttachTo(RootComponent);
 
@@ -45,6 +45,19 @@ ABaseCharacter::ABaseCharacter()
 	if (Widget.Succeeded()) {
 		UserWidget = Widget.Class;
 	}
+
+	ConstructorHelpers::FObjectFinder<USoundCue>
+		SoundCue(TEXT("SoundWave'/Game/Sound/Creepy_Laugh-Adam_Webb-235643261.Creepy_Laugh-Adam_Webb-235643261'"));
+	if (SoundCue.Succeeded()) {
+		walkSound = SoundCue.Object;
+	}
+
+	AudioComp = CreateDefaultSubobject<UAudioComponent>
+		(TEXT("AudioComp"));
+	AudioComp->bAutoActivate = false;
+	AudioComp->AttachTo(GetMesh());
+	
+	bReplicates = true;
 	bReplicateMovement = true;
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
 
@@ -54,6 +67,7 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
 }
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
@@ -103,6 +117,7 @@ void ABaseCharacter::MoveForward(float Value) {
 	{
 		FVector Forward(1, 0, 0);
 		AddMovementInput(GetActorForwardVector(), Value);
+	
 	}
 }
 void ABaseCharacter::MoveRight(float Value) {
@@ -110,6 +125,7 @@ void ABaseCharacter::MoveRight(float Value) {
 	{
 		FVector Right(0, 1, 0);
 		AddMovementInput(GetActorRightVector(), Value);
+		
 	}
 }
 void ABaseCharacter::TurnAtRate(float Rate)
@@ -160,5 +176,19 @@ void ABaseCharacter::Pause() {
 			}
 		}
 	}
+
 }
 
+<<<<<<< HEAD
+=======
+void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ALegos::StaticClass())) {
+
+
+		UE_LOG(LogTemp, Warning, TEXT("Pego!"));
+
+	}
+
+}
+>>>>>>> dba0941934bf2c0a073925dbc8dfceb617d48a7d
