@@ -4,22 +4,24 @@
 #include "Objeto.h"
 
 
+
 // Sets default values
 AObjeto::AObjeto()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
-	Root->bGenerateOverlapEvents = true;
-	Root->SetCollisionProfileName("PhysicsActor");
+	
 	Root->SetSimulatePhysics(true);
-	Root->SetMassOverrideInKg("Peso", 25.0f, true);
+	Root->SetMassOverrideInKg("Peso", peso, true);
+
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	MeshComp->SetCollisionProfileName("NoCollision");
+	MeshComp->SetCollisionProfileName("BlockAllDynamic");
 	MeshComp->AttachTo(RootComponent);
+
+	bReplicates = true;
 
 }
 
@@ -36,6 +38,7 @@ void AObjeto::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 
 }
+
 
 
 
