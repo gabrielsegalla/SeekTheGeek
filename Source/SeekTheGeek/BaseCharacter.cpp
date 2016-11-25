@@ -29,13 +29,7 @@ ABaseCharacter::ABaseCharacter()
 	GetMesh()->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -89.999992f, 0.0f));
 
-<<<<<<< HEAD
 
-
-
-
-=======
->>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
 	// GetMesh()->SetCollisionProfileName("Pawn");
 
 	GetMesh()->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_Yes;
@@ -73,10 +67,7 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-<<<<<<< HEAD
 
-=======
->>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
 }
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
@@ -126,8 +117,7 @@ void ABaseCharacter::MoveForward(float Value) {
 	{
 		FVector Forward(1, 0, 0);
 		AddMovementInput(GetActorForwardVector(), Value);
-		AudioComp->SetSound(walkSound);
-		AudioComp->Play();
+	
 	}
 }
 void ABaseCharacter::MoveRight(float Value) {
@@ -135,8 +125,7 @@ void ABaseCharacter::MoveRight(float Value) {
 	{
 		FVector Right(0, 1, 0);
 		AddMovementInput(GetActorRightVector(), Value);
-		AudioComp->SetSound(walkSound);
-		AudioComp->Play();
+		
 	}
 }
 void ABaseCharacter::TurnAtRate(float Rate)
@@ -152,12 +141,12 @@ void ABaseCharacter::StartRun() {
 		Run = true;
 	}
 	if (Run) {
-		GetCharacterMovement()->MaxWalkSpeed = 1600;
+		GetCharacterMovement()->MaxWalkSpeed += 400;
 	}
 }
 void ABaseCharacter::StopRun() {
 	Run = false;
-	GetCharacterMovement()->MaxWalkSpeed = 800;
+	GetCharacterMovement()->MaxWalkSpeed = 400;
 }
 void ABaseCharacter::StartCrouch() {
 	Crouch();
@@ -187,10 +176,11 @@ void ABaseCharacter::Pause() {
 			}
 		}
 	}
-<<<<<<< HEAD
-=======
+
 }
 
+<<<<<<< HEAD
+=======
 void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ALegos::StaticClass())) {
@@ -199,5 +189,6 @@ void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 		UE_LOG(LogTemp, Warning, TEXT("Pego!"));
 
 	}
->>>>>>> 7426cf9a746a8bbbda4abda356e8e8d9188a7181
+
 }
+>>>>>>> dba0941934bf2c0a073925dbc8dfceb617d48a7d
