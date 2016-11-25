@@ -125,12 +125,12 @@ void ABaseCharacter::StartRun() {
 		Run = true;
 	}
 	if (Run) {
-		GetCharacterMovement()->MaxWalkSpeed = 1600;
+		GetCharacterMovement()->MaxWalkSpeed += 400;
 	}
 }
 void ABaseCharacter::StopRun() {
 	Run = false;
-	GetCharacterMovement()->MaxWalkSpeed = 800;
+	GetCharacterMovement()->MaxWalkSpeed = 400;
 }
 void ABaseCharacter::StartCrouch() {
 	Crouch();
@@ -162,12 +162,3 @@ void ABaseCharacter::Pause() {
 	}
 }
 
-void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-
-	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ALegos::StaticClass())) {
-
-
-		UE_LOG(LogTemp, Warning, TEXT("Pego!"));
-
-	}
-}

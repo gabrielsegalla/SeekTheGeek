@@ -59,7 +59,7 @@ void APowerUp::Tick(float DeltaTime)
 	if (Char->GetPowerUp()) {
 		Timer++;
 
-		Char->GetCharacterMovement()->MaxWalkSpeed += 1000;
+		Char->GetCharacterMovement()->MaxWalkSpeed += 400;
 		UE_LOG(LogTemp, Warning, TEXT("Timer: %d"), Timer);
 	}
 
@@ -68,7 +68,7 @@ void APowerUp::Tick(float DeltaTime)
 		Timer = 0;
 
 		Char->SetPowerUp(false);
-		Char->GetCharacterMovement()->MaxWalkSpeed = 800;
+		Char->GetCharacterMovement()->MaxWalkSpeed = 400;
 
 		UE_LOG(LogTemp, Warning, TEXT("Zerando Timer"));
 
