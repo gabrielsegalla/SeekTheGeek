@@ -28,6 +28,15 @@ ABaseCharacter::ABaseCharacter()
 	GetMesh()->SetWorldLocation(FVector(18.0f, 0.0f, -31.0f));
 	GetMesh()->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -89.999992f, 0.0f));
+	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+	ConstructorHelpers::FObjectFinder<UAnimBlueprint>
+		AnimObj(TEXT("AnimBlueprint'/Game/Blueprint/beaWalk.beaWalk'"));
+	if (AnimObj.Succeeded()) {
+		GetMesh()->SetAnimInstanceClass(AnimObj.Object->GetAnimBlueprintGeneratedClass());
+	}
+
+	
 
 
 	// GetMesh()->SetCollisionProfileName("Pawn");
@@ -46,17 +55,7 @@ ABaseCharacter::ABaseCharacter()
 		UserWidget = Widget.Class;
 	}
 
-	ConstructorHelpers::FObjectFinder<USoundCue>
-		SoundCue(TEXT("SoundWave'/Game/Sound/Creepy_Laugh-Adam_Webb-235643261.Creepy_Laugh-Adam_Webb-235643261'"));
-	if (SoundCue.Succeeded()) {
-		walkSound = SoundCue.Object;
-	}
 
-	AudioComp = CreateDefaultSubobject<UAudioComponent>
-		(TEXT("AudioComp"));
-	AudioComp->bAutoActivate = false;
-	AudioComp->AttachTo(GetMesh());
-	
 	bReplicates = true;
 	bReplicateMovement = true;
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
@@ -75,6 +74,12 @@ void ABaseCharacter::Tick(float DeltaTime)
 
 
 	Super::Tick(DeltaTime);
+
+	if (GetMesh()->GetAnimationMode() == EAnimationMode::AnimationSingleNode
+		&& GetCharacterMovement()->IsMovingOnGround()) {
+		GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+	}
+
 	if (Run) {
 		Stamina--;
 		//UE_LOG(LogTemp, Warning, TEXT("Stamina--: %d"), Stamina);
@@ -113,19 +118,20 @@ void ABaseCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	//InputComponent->BindAction("Drop", IE_Pressed, this, &AMyCharacter::DropProjectile);
 }
 void ABaseCharacter::MoveForward(float Value) {
-	if (Value != 0.0f)
-	{
-		FVector Forward(1, 0, 0);
-		AddMovementInput(GetActorForwardVector(), Value);
-	
+	if (Controller != nullptr && Value != 0) {
+		FRotator Rotation = Controller->GetControlRotation();
+		if (GetCharacterMovement()->IsMovingOnGround()) {
+			Rotation.Pitch = 0.0f;
+		}
+		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
 	}
 }
 void ABaseCharacter::MoveRight(float Value) {
-	if (Value != 0.0f)
-	{
-		FVector Right(0, 1, 0);
-		AddMovementInput(GetActorRightVector(), Value);
-		
+	if (Controller != nullptr && Value != 0.0f) {
+		FRotator Rotation = Controller->GetControlRotation();
+		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
 	}
 }
 void ABaseCharacter::TurnAtRate(float Rate)
@@ -141,7 +147,7 @@ void ABaseCharacter::StartRun() {
 		Run = true;
 	}
 	if (Run) {
-		GetCharacterMovement()->MaxWalkSpeed += 400;
+		GetCharacterMovement()->MaxWalkSpeed = 800;
 	}
 }
 void ABaseCharacter::StopRun() {
@@ -179,8 +185,6 @@ void ABaseCharacter::Pause() {
 
 }
 
-<<<<<<< HEAD
-=======
 void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ALegos::StaticClass())) {
@@ -191,4 +195,4 @@ void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 	}
 
 }
->>>>>>> dba0941934bf2c0a073925dbc8dfceb617d48a7d
+
