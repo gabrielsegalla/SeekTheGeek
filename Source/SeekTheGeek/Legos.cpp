@@ -67,8 +67,9 @@ void ALegos::Tick( float DeltaTime )
 
 	if (Char->GetOnLego()) {
 		Timer++;
+		Char->GetCharacterMovement()->MaxWalkSpeed = 200;
 
-		//UE_LOG(LogTemp, Warning, (TEXT("PISOU NO LEGO")), Timer);
+		UE_LOG(LogTemp, Warning, (TEXT("PISOU NO LEGO")), Timer);
 	}
 
 
@@ -77,6 +78,7 @@ void ALegos::Tick( float DeltaTime )
 		Timer = 0;
 
 		Char->SetOnLego(false);
+		Char->GetCharacterMovement()->MaxWalkSpeed = 400;
 
 		UE_LOG(LogTemp, Warning, TEXT("Zerando Timer"));
 

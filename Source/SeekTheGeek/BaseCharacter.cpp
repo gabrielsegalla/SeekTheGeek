@@ -141,12 +141,12 @@ void ABaseCharacter::StartRun() {
 		Run = true;
 	}
 	if (Run) {
-		GetCharacterMovement()->MaxWalkSpeed = 1600;
+		GetCharacterMovement()->MaxWalkSpeed += 400;
 	}
 }
 void ABaseCharacter::StopRun() {
 	Run = false;
-	GetCharacterMovement()->MaxWalkSpeed = 800;
+	GetCharacterMovement()->MaxWalkSpeed = 400;
 }
 void ABaseCharacter::StartCrouch() {
 	Crouch();
@@ -179,6 +179,8 @@ void ABaseCharacter::Pause() {
 
 }
 
+<<<<<<< HEAD
+=======
 void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ALegos::StaticClass())) {
@@ -189,3 +191,4 @@ void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 	}
 
 }
+>>>>>>> dba0941934bf2c0a073925dbc8dfceb617d48a7d
