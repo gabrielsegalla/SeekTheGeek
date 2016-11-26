@@ -21,14 +21,14 @@ ABaseCharacter::ABaseCharacter()
 	GetCapsuleComponent()->SetCapsuleRadius(19.0);
 
 	ConstructorHelpers::FObjectFinder<USkeletalMesh>
-		SkeletalMesh(TEXT("SkeletalMesh'/Game/Personagens/Tobissauro/tobissauro.tobissauro'"));
+		SkeletalMesh(TEXT("SkeletalMesh'/Game/Personagens/Beabee/Beabee.Beabee'"));
 	if (SkeletalMesh.Succeeded()) {
 		GetMesh()->SetSkeletalMesh(SkeletalMesh.Object);
 	}
 	GetMesh()->SetWorldLocation(FVector(18.0f, 0.0f, -31.0f));
 	GetMesh()->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -89.999992f, 0.0f));
-	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+
 	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 	ConstructorHelpers::FObjectFinder<UAnimBlueprint>
 		AnimObj(TEXT("AnimBlueprint'/Game/Blueprint/beaWalk.beaWalk'"));
