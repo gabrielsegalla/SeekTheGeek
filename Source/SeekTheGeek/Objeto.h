@@ -26,8 +26,7 @@ private:
 		UShapeComponent* Root;
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* MeshComp;
-	UPROPERTY(EditAnywhere)
-		float peso = 50;
+	
 	
 
 };

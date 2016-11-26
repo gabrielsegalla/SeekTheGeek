@@ -10,18 +10,21 @@ AObjeto::AObjeto()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 	
+	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
+	
+	Root->SetCollisionProfileName("PhysicsActor");
 	Root->SetSimulatePhysics(true);
-	Root->SetMassOverrideInKg("Peso", peso, true);
+	Root->SetMassOverrideInKg("Peso", 25.0f, true);
+	Root->bGenerateOverlapEvents = true;
 
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	MeshComp->SetCollisionProfileName("BlockAllDynamic");
+	MeshComp->SetCollisionProfileName("NoCollision");
 	MeshComp->AttachTo(RootComponent);
 
-	bReplicates = true;
+	
 
 }
 
