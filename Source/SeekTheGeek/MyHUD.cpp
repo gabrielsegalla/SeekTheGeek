@@ -9,7 +9,7 @@
 
 AMyHUD::AMyHUD() {
 	
-	static ConstructorHelpers::FObjectFinder<UFont>Font(TEXT("Font'/Engine/EngineFonts/RobotoDistanceField.RobotoDistanceField'"));
+	static ConstructorHelpers::FObjectFinder<UFont>Font(TEXT("Font'/Game/BebasNeue.BebasNeue'"));
 
 	if (Font.Succeeded()) {
 		HUDFont = Font.Object;
@@ -29,7 +29,7 @@ void AMyHUD::DrawHUD() {
 
 	FVector2D ScreenDimensions = FVector2D(Canvas->SizeX, Canvas->SizeY);
 
-	ABaseCharacter* BaseCharacter = Cast<ABaseCharacter>(
+	ABaseCharacter* Char = Cast<ABaseCharacter>(
 
 		UGameplayStatics::GetPlayerPawn(this, 0));
 
@@ -40,6 +40,20 @@ void AMyHUD::DrawHUD() {
 	DrawTexture(MyTexture, 200, 150, BaseCharacter->GetStamina(), MyTexture->GetSizeY(), 200, 200, BaseCharacter->GetStamina(), MyTexture->GetSizeY(), FLinearColor::White, EBlendMode::BLEND_Opaque, 1.0, false, 1.0f, FVector2D::ZeroVector);
 
 	*/
+
+	FString EncontradoString = FString::Printf(TEXT("CORRA!!!"));
+
+	FString VenceuString = FString::Printf(TEXT("VOCÊ VENCEU!!!"));
+
+
+	if (Char->GetEncontrado()) {
+		DrawText(EncontradoString, FColor::Red, 300, 200, HUDFont);
+	}
+
+	if (Char->GetVenceu()) {
+		DrawText(VenceuString, FColor::Yellow, 300, 200, HUDFont);
+
+	}
 
 
 }

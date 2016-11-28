@@ -37,6 +37,11 @@ public:
 	FORCEINLINE bool GetFound() const { return Found; }
 	FORCEINLINE void ABaseCharacter::SetFound(bool NewFound) { Found = NewFound; }
 
+	FORCEINLINE bool GetEncontrado() const { return Encontrado; }
+	FORCEINLINE void ABaseCharacter::SetEncontrado(bool NewEncontrado) { Encontrado = NewEncontrado; }
+
+	FORCEINLINE bool GetVenceu() const { return Venceu; }
+	FORCEINLINE void ABaseCharacter::SetVenceu(bool NewVenceu) { Venceu = NewVenceu; }
 
 
 private:
@@ -83,6 +88,9 @@ private:
 	void StopCrouch();
 	void Pause();
 
+	void Encontrar();
+	void Vencer();
+
 	//variáveis de encontrar/ ser encontrado
 
 
@@ -113,5 +121,10 @@ private:
 
 	//bool para teleport
 	bool Teleporting = false;
+
+	bool Encontrado;
+	int EncontradoTimer = 200;
+	bool Venceu;
+	int VenceuTimer = 200;
 
 };

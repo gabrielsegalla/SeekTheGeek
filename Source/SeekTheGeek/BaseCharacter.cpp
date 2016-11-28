@@ -95,6 +95,22 @@ void ABaseCharacter::Tick(float DeltaTime)
 		StopRun();
 		Stamina = 0;
 	}
+
+	if (Encontrado) {
+		EncontradoTimer--;
+	}
+
+	if (EncontradoTimer == 0) {
+		SetEncontrado(false);
+	}
+
+	if (Venceu) {
+		VenceuTimer--;
+	}
+
+	if (VenceuTimer == 0) {
+		SetVenceu(false);
+	}
 }
 // Called to bind functionality to input
 void ABaseCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -113,6 +129,8 @@ void ABaseCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	InputComponent->BindAction("Crouch", IE_Pressed, this, &ABaseCharacter::StartCrouch);
 	InputComponent->BindAction("Crouch", IE_Released, this, &ABaseCharacter::StopCrouch);
 	InputComponent->BindAction("Pause", IE_Released, this, &ABaseCharacter::Pause);
+	InputComponent->BindAction("Encontrou", IE_Released, this, &ABaseCharacter::Encontrar);
+	InputComponent->BindAction("Venceu", IE_Released, this, &ABaseCharacter::Vencer);
 	bReplicates = true;
 	bReplicateMovement = true;
 	//InputComponent->BindAction("Drop", IE_Pressed, this, &AMyCharacter::DropProjectile);
@@ -195,4 +213,17 @@ void ABaseCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 	}
 
 }
+
+
+void ABaseCharacter::Encontrar() {
+
+	SetEncontrado(true);
+
+}
+void ABaseCharacter::Vencer() {
+
+	SetVenceu(true);
+
+}
+
 
